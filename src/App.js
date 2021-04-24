@@ -1,12 +1,13 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
+import Dashboard from './Dashboard/Dashboard';
 
 const App = () => {
-    return(
-        <Fragment>
-            <h1>Hello</h1>
-        </Fragment>
-    );
+  return (
+    <Fragment>
+      <Dashboard />
+    </Fragment>
+  );
 };
 
 ReactDOM.render(<App />, document.getElementById('root'));
