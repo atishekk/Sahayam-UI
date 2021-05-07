@@ -5,13 +5,15 @@ import deepPurple from '@material-ui/core/colors/deepPurple';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import orange from '@material-ui/core/colors/orange';
+import pink from '@material-ui/core/colors/pink';
+import blue from '@material-ui/core/colors/blue';
 
 import ResponsiveDrawer from './Drawer';
 
 function Dashboard() {
   const [darkState, setDarkState] = useState(false);
   const palletType = darkState ? 'dark' : 'light';
-  const mainPrimaryColor = darkState ? orange[500] : deepPurple[500];
+  const mainPrimaryColor = darkState ? pink[500] : blue[500];
   const mainSecondaryColor = darkState ? deepOrange[900] : lightBlue[500];
 
   const darkTheme = createMuiTheme({
