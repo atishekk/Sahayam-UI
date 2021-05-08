@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import Dashboard from './Dashboard/Dashboard';
+import Dashboard from './DashboardSample/Dashboard';
+import { SwitchProvider } from './contexts/switchContext';
 
 const App = () => {
   return (
-    <Fragment>
+    <SwitchProvider>
       <Dashboard />
-    </Fragment>
+    </SwitchProvider>
   );
 };
 
