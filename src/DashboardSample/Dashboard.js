@@ -3,7 +3,6 @@ import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSwitch } from "../contexts/switchContext";
 import { Paper, CssBaseline, Typography } from "@material-ui/core";
-import { useSwitch } from "../contexts/switchContext";
 import SideBar from "../SideBar/SideBar";
 import Post from "../FeedContainer/Post";
 
@@ -57,10 +56,16 @@ function Dashboard() {
             <Paper className={classes.paper}>Left</Paper>
           </Grid>
           <Grid item xs={6} className={classes.MiddleCol}>
-            <Paper className={classes.paper}>Middle</Paper>
+            <Paper className={classes.paper}>
+              Middle
+              <Post />
+            </Paper>
           </Grid>
           <Grid item xs={3} className={classes.RightCol}>
-            <Paper className={classes.paper}>Right</Paper>
+            <Paper className={classes.paper}>
+              Right
+              <SideBar />
+            </Paper>
           </Grid>
         </Grid>
       </Paper>
