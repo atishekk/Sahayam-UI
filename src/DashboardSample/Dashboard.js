@@ -31,7 +31,7 @@ const styles = {
     color: '#fff',
     overflow: 'hidden'
   },
-  middleLight: { backgroundColor: '#eee', color: '#111' }
+  middleLight: { backgroundColor: '#e6e7e8', color: '#111' }
 };
 const useStyles = makeStyles({
   root: {
@@ -51,16 +51,17 @@ const useStyles = makeStyles({
   },
   LeftCol: {
     padding: '0px 10px 15px 10px',
-    height: '850px'
+    height: '820px'
   },
-  MiddleCol: { padding: '20px 10px 15px 10px', maxHeight: '850px' },
+  MiddleCol: { padding: '20px 10px 5px 10px', maxHeight: '820px' },
   RightCol: { padding: '0px 10px 15px 10px' }
 });
 
 function Dashboard() {
   const classes = useStyles();
-  const { dark, setDark } = useSwitch();
+  const { dark, setDark, setProfile } = useSwitch();
   // setDark(false);
+  setProfile(true);
   return (
     <CssBaseline>
       <Paper style={dark ? styles.paperContainerDark : styles.paperContainerLight} square={true}>
