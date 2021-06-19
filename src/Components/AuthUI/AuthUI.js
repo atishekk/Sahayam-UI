@@ -19,7 +19,7 @@ function AuthUI() {
   const [NGO, setNGO] = useState();
 
   useEffect(() => {
-    setContainer(document.getElementById('container'));
+    setContainer(document.querySelector('.container'));
   });
 
   const onSignUp = (e) => {
@@ -34,7 +34,7 @@ function AuthUI() {
 
   return (
     <div>
-      <div className="container" id="container">
+      <div className="container">
         <div className="form-container sign-up-container">
           <form onSubmit={(e) => onSignUp(e)}>
             <h1>Create Account</h1>

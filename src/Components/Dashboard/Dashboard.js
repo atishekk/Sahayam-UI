@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './dashboard.scss';
 import Post from '../Posts/Post';
 import '../../Utils/buttons.scss';
 import { Link } from 'react-router-dom';
 
+import { Popover } from 'react-tiny-popover';
+import Profile from '../Profile/Profile';
+
 function Dashboard() {
+  const [isPopoverOpen, setIsPopoverOpen] = useState(true);
   // query all posts and set data in posts
-  // const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([])
 
   const posts = [
     {

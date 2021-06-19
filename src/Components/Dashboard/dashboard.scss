@@ -99,3 +99,18 @@ $white: #eee;
     margin-top: 200px;
   }
 }
+
+#container {
+  width: 350px;
+  height: 500px;
+  background: inherit;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow: hidden;
+  margin-left: -175px;
+  margin-top: -250px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
