@@ -4,32 +4,113 @@ import './Auth.scss';
 function AuthUI() {
   const [container, setContainer] = useState();
 
+  // signIn
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  // signUp
+  const [newEmail, setNewEmail] = useState();
+  const [newPassword, setNewPassword] = useState();
+  const [name, setName] = useState();
+  const [address, setAddress] = useState();
+  const [number, setNumber] = useState();
+  const [area, setArea] = useState();
+  const [role, setRole] = useState();
+  const [NGO, setNGO] = useState();
+
   useEffect(() => {
     setContainer(document.getElementById('container'));
   });
+
+  const onSignUp = (e) => {
+    console.log(name, newEmail, newPassword, address, number, area);
+    e.preventDefault();
+  };
+
+  const onSignIn = (e) => {
+    console.log(email, password);
+    e.preventDefault();
+  };
 
   return (
     <div>
       <div className="container" id="container">
         <div className="form-container sign-up-container">
-          <form action="#">
+          <form onSubmit={(e) => onSignUp(e)}>
             <h1>Create Account</h1>
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <input type="text" placeholder="Number" />
-            <input type="text" placeholder="Address" />
-            <input type="text" placeholder="Area" />
-            <button>Sign Up</button>
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Number"
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Area"
+              value={area}
+              onChange={(e) => setArea(e.target.value)}
+            />
+            <select value={role} onChange={(e) => setRole(e.target.value)}>
+              <option value="none" selected disabled hidden>
+                Select Role
+              </option>
+              <option value="NGO Worker">NGO Worker</option>
+              <option value="User">Volunteer</option>
+            </select>
+            {role == 'NGO Worker' ? (
+              <input
+                type="text"
+                placeholder="NGO name"
+                value={NGO}
+                onChange={(e) => setNGO(e.target.value)}
+              />
+            ) : null}
+            <button value="save" type="submit">
+              Sign Up
+            </button>
           </form>
         </div>
         <div className="form-container sign-in-container">
-          <form action="#">
+          <form onSubmit={(e) => onSignIn(e)}>
             <h1>Sign in</h1>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <a href="#">Forgot your password?</a>
-            <button>Sign In</button>
+            <button type="submit">Sign In</button>
           </form>
         </div>
         <div className="overlay-container">
