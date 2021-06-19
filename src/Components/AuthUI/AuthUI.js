@@ -1,35 +1,61 @@
 import React, { useEffect, useState } from 'react';
+import { gql } from '@apollo/client';
 import './Auth.scss';
 
 function AuthUI() {
+  //  const SIGNUP_USER = gql``;
+
   const [container, setContainer] = useState();
+  const [partOne, setPartOne] = useState();
+  const [partTwo, setPartTwo] = useState();
+  const [dateState, setDateState] = useState('text');
 
   // signIn
-  const [email, setEmail] = useState();
+  const [identifier, setIdentifier] = useState();
   const [password, setPassword] = useState();
 
   // signUp
-  const [newEmail, setNewEmail] = useState();
-  const [newPassword, setNewPassword] = useState();
-  const [name, setName] = useState();
-  const [address, setAddress] = useState();
-  const [number, setNumber] = useState();
-  const [area, setArea] = useState();
-  const [role, setRole] = useState();
-  const [NGO, setNGO] = useState();
+  const [newEmail, setNewEmail] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [username, setUserName] = useState('');
+  const [name, setName] = useState('');
+  const [DOB, setDOB] = useState();
+  const [city, setCity] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [country, setCountry] = useState('');
+  const [role, setRole] = useState('None');
+  const [NGO, setNGO] = useState('');
+  const [progress, setProgress] = useState(false);
 
   useEffect(() => {
-    setContainer(document.querySelector('.container'));
+    setContainer(document.getElementById('container'));
+    setPartOne(document.getElementById('part_one'));
+    setPartTwo(document.getElementById('part_two'));
   });
 
   const onSignUp = (e) => {
     e.preventDefault();
-    console.log(name, newEmail, newPassword, address, number, area);
+    console.log(name, newEmail, newPassword, city, mobile, country, Date(DOB));
   };
 
   const onSignIn = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    console.log(identifier, password);
+  };
+
+  const gotoFirstPart = () => {
+    partTwo.classList.remove('active-form-part');
+    partTwo.classList.add('inactive-form-part');
+    partOne.classList.add('active-form-part');
+    partOne.classList.remove('inactive-form-part');
+  };
+
+  const gotoSecondPart = () => {
+    partOne.classList.remove('active-form-part');
+    partOne.classList.add('inactive-form-part');
+    partTwo.classList.add('active-form-part');
+    partTwo.classList.remove('inactive-form-part');
   };
 
   return (
@@ -38,70 +64,118 @@ function AuthUI() {
         <div className="form-container sign-up-container">
           <form onSubmit={(e) => onSignUp(e)}>
             <h1>Create Account</h1>
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Number"
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Area"
-              value={area}
-              onChange={(e) => setArea(e.target.value)}
-            />
-            <select value={role} onChange={(e) => setRole(e.target.value)}>
-              <option value="none" selected disabled hidden>
-                Select Role
-              </option>
-              <option value="NGO Worker">NGO Worker</option>
-              <option value="User">Volunteer</option>
-            </select>
-            {role == 'NGO Worker' ? (
+            <div>
+              {' '}
+              {!progress ? <h3>Basic Information</h3> : <h3> Additional Information </h3>}{' '}
+            </div>
+            <div id="part_one" className="active-form-part">
               <input
                 type="text"
-                placeholder="NGO name"
-                value={NGO}
-                onChange={(e) => setNGO(e.target.value)}
+                placeholder="User Name"
+                value={username}
+                onChange={(e) => setUserName(e.target.value)}
               />
-            ) : null}
-            <button value="save" type="submit">
-              Sign Up
-            </button>
+              <input
+                type="text"
+                placeholder="Your Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                type="email"
+                placeholder="Email Address"
+                value={newEmail}
+                onChange={(e) => setNewEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <button
+                value="next"
+                onClick={() => {
+                  setProgress(true);
+                  gotoSecondPart();
+                }}
+              >
+                Next
+              </button>
+            </div>
+            <div id="part_two" className="inactive-form-part">
+              <input
+                placeholder="Date of Birth"
+                type={dateState}
+                onFocus={() => setDateState('date')}
+                onBlur={() => setDateState('text')}
+                value={DOB}
+                onChange={(e) => setDOB(e.target.value)}
+                id="date"
+              />
+              <input
+                type="text"
+                placeholder="Phone Number"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="City"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Country"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              />
+              <select value={role} onChange={(e) => setRole(e.target.value)}>
+                <option value="None" disabled hidden>
+                  Select Role
+                </option>
+                <option value="Worker">NGO Worker</option>
+                <option value="User">Volunteer</option>
+              </select>
+              {role == 'Worker' ? (
+                <input
+                  type="text"
+                  placeholder="NGO Name"
+                  value={NGO}
+                  onChange={(e) => setNGO(e.target.value)}
+                />
+              ) : null}
+              <button
+                value="next"
+                className="back-button"
+                onClick={() => {
+                  setProgress(false);
+                  gotoFirstPart();
+                }}
+              >
+                Go Back
+              </button>
+              <button value="save" type="submit">
+                Sign Up
+              </button>
+            </div>
           </form>
         </div>
         <div className="form-container sign-in-container">
           <form onSubmit={(e) => onSignIn(e)}>
             <h1>Sign in</h1>
             <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="Email or Username"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
             />
             <input
               type="password"
