@@ -87,10 +87,15 @@ $white: #eee;
   top: 100px;
 }
 .col3 {
+  a {
+    display: block;
+    transform: scale(0.5);
+  }
   button {
+    width: 100%;
     position: sticky;
     top: 100px;
-    margin-left: 100px;
+    margin-left: 0px;
     margin-top: 200px;
   }
 }

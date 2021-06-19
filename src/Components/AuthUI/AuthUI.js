@@ -23,13 +23,13 @@ function AuthUI() {
   });
 
   const onSignUp = (e) => {
-    console.log(name, newEmail, newPassword, address, number, area);
     e.preventDefault();
+    console.log(name, newEmail, newPassword, address, number, area);
   };
 
   const onSignIn = (e) => {
-    console.log(email, password);
     e.preventDefault();
+    console.log(email, password);
   };
 
   return (
