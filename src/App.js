@@ -1,23 +1,21 @@
-import React, { Fragment } from 'react';
-import ReactDOM from 'react-dom';
-import Dashboard from './DashboardSample/Dashboard';
-import { SwitchProvider } from './contexts/switchContext';
-import SignUpPage from './AuthUI/SignUp';
-import SignInPage from './AuthUI/SignIn';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import './App.scss';
+import AuthUI from './Components/AuthUI/AuthUI';
+import Dashboard from './Components/Dashboard/Dashboard';
+import Navbar from './Components/Navbar/navbar';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-const App = () => {
+function App() {
   return (
-    <Router>
-      <SwitchProvider>
+    <div className="App">
+      <Navbar />
+      <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Dashboard} />
-          <Route path="/login" component={SignInPage} />
-          <Route path="/signup" component={SignUpPage} />
+          <Route path="/" exact component={Dashboard} />
+          <Route path="/auth" component={AuthUI} />
         </Switch>
-      </SwitchProvider>
-    </Router>
+      </BrowserRouter>
+    </div>
   );
-};
+}
 
-ReactDOM.render(<App />, document.getElementById('root'));
+export default App;
