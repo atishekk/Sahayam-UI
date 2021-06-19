@@ -3,6 +3,7 @@ import AuthUI from './Components/AuthUI/AuthUI';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Navbar from './Components/Navbar/navbar';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import AddTask from './Components/TaskForm/AddTask';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Dashboard} />
           <Route path="/auth" component={AuthUI} />
+          <Route path="/addtask" component={AddTask} />
         </Switch>
       </BrowserRouter>
     </div>

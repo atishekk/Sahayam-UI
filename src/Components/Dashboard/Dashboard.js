@@ -2,34 +2,35 @@ import React from 'react';
 import './dashboard.scss';
 import Post from '../Posts/Post';
 import '../../Utils/buttons.scss';
+import { Link } from 'react-router-dom';
 
 function Dashboard() {
   return (
     <div className="main-dash">
       <div className="col1">
         <div className="filter">
-          <label class="label-container">
+          <label className="label-container">
             One
             <input type="checkbox" checked="checked" />
-            <span class="checkmark"></span>
+            <span className="checkmark"></span>
           </label>
 
-          <label class="label-container">
+          <label className="label-container">
             Two
             <input type="checkbox" />
-            <span class="checkmark"></span>
+            <span className="checkmark"></span>
           </label>
 
-          <label class="label-container">
+          <label className="label-container">
             Three
             <input type="checkbox" />
-            <span class="checkmark"></span>
+            <span className="checkmark"></span>
           </label>
 
-          <label class="label-container">
+          <label className="label-container">
             Four
             <input type="checkbox" />
-            <span class="checkmark"></span>
+            <span className="checkmark"></span>
           </label>
         </div>
       </div>
@@ -42,7 +43,9 @@ function Dashboard() {
         <Post />
       </div>
       <div className="col3">
-        <button className="fill">Add A Task</button>
+        <Link to="/addTask">
+          <button className="fill">Add A Task</button>
+        </Link>
       </div>
     </div>
   );
