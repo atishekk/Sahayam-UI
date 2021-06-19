@@ -5,6 +5,32 @@ import '../../Utils/buttons.scss';
 import { Link } from 'react-router-dom';
 
 function Dashboard() {
+  // query all posts and set data in posts
+  // const [posts, setPosts] = useState([]);
+
+  const posts = [
+    {
+      title: 'Title-1',
+      description: 'desc',
+      context: {}
+    },
+    {
+      title: 'Title-2',
+      description: 'desc-2',
+      context: {}
+    },
+    {
+      title: 'Title-3',
+      description: 'desc-3',
+      context: {}
+    },
+    {
+      title: 'Title-4',
+      description: 'desc-4',
+      context: {}
+    }
+  ];
+
   return (
     <div className="main-dash">
       <div className="col1">
@@ -36,11 +62,9 @@ function Dashboard() {
       </div>
 
       <div className="col2">
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+        {posts.map((post) => (
+          <Post title={post.title} description={post.description} context={post.context} />
+        ))}
       </div>
       <div className="col3">
         <Link to="/addTask">

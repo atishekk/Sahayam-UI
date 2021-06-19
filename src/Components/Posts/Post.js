@@ -1,7 +1,7 @@
 import React from 'react';
 import './Post.scss';
 import '../../Utils/buttons.scss';
-function Post() {
+function Post({ title, description, context }) {
   return (
     <div>
       <div className="main">
@@ -14,9 +14,10 @@ function Post() {
 
             <div className="post-content">
               <p className="post-header">
-                <a href="#">Title</a>{' '}
+                <a href="#">{title}</a>{' '}
               </p>
               <p className="post-text">
+                {description}
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, sunt asperiores
                 quaerat doloremque commodi facere dolor. Velit pariatur, enim veniam! Lorem ipsum
                 dolor sit amet consectetur adipisicing elit. Dolore, sunt asperiores quaerat
