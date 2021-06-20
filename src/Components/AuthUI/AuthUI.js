@@ -1,39 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import {gql} from "@apollo/client";
+import { gql } from '@apollo/client';
 import './Auth.scss';
 
 function AuthUI() {
-
   //  const SIGNUP_USER = gql``;
-
 
   const [container, setContainer] = useState();
   const [partOne, setPartOne] = useState();
   const [partTwo, setPartTwo] = useState();
-  const [dateState, setDateState] = useState("text")
+  const [dateState, setDateState] = useState('text');
 
   // signIn
   const [identifier, setIdentifier] = useState();
   const [password, setPassword] = useState();
 
   // signUp
-  const [newEmail, setNewEmail] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [username, setUserName] = useState("");
-  const [name, setName] = useState("");
+  const [newEmail, setNewEmail] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [username, setUserName] = useState('');
+  const [name, setName] = useState('');
   const [DOB, setDOB] = useState();
-  const [city, setCity] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [country, setCountry] = useState("");
-  const [role, setRole] = useState("None");
-  const [NGO, setNGO] = useState("");
+  const [city, setCity] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [country, setCountry] = useState('');
+  const [role, setRole] = useState('None');
+  const [NGO, setNGO] = useState('');
   const [progress, setProgress] = useState(false);
 
   useEffect(() => {
-    setContainer(document.getElementById('container'));
-    setPartOne(document.getElementById("part_one"));
-    setPartTwo(document.getElementById("part_two"));
+    setContainer(document.querySelector('.container'));
+    setPartOne(document.getElementById('part_one'));
+    setPartTwo(document.getElementById('part_two'));
   });
 
   const onSignUp = (e) => {
@@ -47,30 +45,29 @@ function AuthUI() {
   };
 
   const gotoFirstPart = () => {
-    partTwo.classList.remove("active-form-part");
-    partTwo.classList.add("inactive-form-part");
-    partOne.classList.add("active-form-part");
-    partOne.classList.remove("inactive-form-part");
-  }
+    partTwo.classList.remove('active-form-part');
+    partTwo.classList.add('inactive-form-part');
+    partOne.classList.add('active-form-part');
+    partOne.classList.remove('inactive-form-part');
+  };
 
   const gotoSecondPart = () => {
-    partOne.classList.remove("active-form-part");
-    partOne.classList.add("inactive-form-part");
-    partTwo.classList.add("active-form-part");
-    partTwo.classList.remove("inactive-form-part");
-  }
+    partOne.classList.remove('active-form-part');
+    partOne.classList.add('inactive-form-part');
+    partTwo.classList.add('active-form-part');
+    partTwo.classList.remove('inactive-form-part');
+  };
 
   return (
     <div>
-      <div className="container" id="container">
+      <div className="container">
         <div className="form-container sign-up-container">
           <form onSubmit={(e) => onSignUp(e)}>
             <h1>Create Account</h1>
-            <div> {!progress ? 
-              <h3>
-                Basic Information
-              </h3>
-              : <h3> Additional Information </h3> } </div>
+            <div>
+              {' '}
+              {!progress ? <h3>Basic Information</h3> : <h3> Additional Information </h3>}{' '}
+            </div>
             <div id="part_one" className="active-form-part">
               <input
                 type="text"
@@ -102,22 +99,26 @@ function AuthUI() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              <button value="next" onClick={() => {
-                setProgress(true);
-                gotoSecondPart();
-              }}>
+              <button
+                value="next"
+                onClick={() => {
+                  setProgress(true);
+                  gotoSecondPart();
+                }}
+              >
                 Next
               </button>
             </div>
             <div id="part_two" className="inactive-form-part">
-              <input 
+              <input
                 placeholder="Date of Birth"
-                type={dateState} 
-                onFocus={() => setDateState('date')} 
-                onBlur={() => setDateState('text')} 
+                type={dateState}
+                onFocus={() => setDateState('date')}
+                onBlur={() => setDateState('text')}
                 value={DOB}
                 onChange={(e) => setDOB(e.target.value)}
-                id="date" />
+                id="date"
+              />
               <input
                 type="text"
                 placeholder="Phone Number"
@@ -151,10 +152,14 @@ function AuthUI() {
                   onChange={(e) => setNGO(e.target.value)}
                 />
               ) : null}
-              <button value="next" className="back-button" onClick={() => {
-                setProgress(false);
-                gotoFirstPart();
-              }}>
+              <button
+                value="next"
+                className="back-button"
+                onClick={() => {
+                  setProgress(false);
+                  gotoFirstPart();
+                }}
+              >
                 Go Back
               </button>
               <button value="save" type="submit">

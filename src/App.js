@@ -4,6 +4,7 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import Navbar from './Components/Navbar/navbar';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import AddTask from './Components/TaskForm/AddTask';
+import Profile from './Components/Profile/Profile';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" exact component={Dashboard} />
           <Route path="/auth" component={AuthUI} />
           <Route path="/addtask" component={AddTask} />
+          <Route path="/profile" component={Profile} />
         </Switch>
       </BrowserRouter>
     </div>

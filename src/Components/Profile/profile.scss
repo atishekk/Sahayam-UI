@@ -1,0 +1,101 @@
+main {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px); // This be the blur
+}
+
+#container-pop {
+  transform: translate(-29%, 113%);
+  width: 350px;
+  height: 500px;
+  background: inherit;
+  overflow: hidden;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+
+  h1,
+  h2,
+  p {
+    transform: translateY(20px);
+    color: #000;
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 24px;
+    margin: 16px auto;
+  }
+  img {
+    position: absolute;
+    top: 10px;
+    transform: translate(-50%, -90%);
+  }
+
+  button {
+    border: 0;
+    border-radius: 8px;
+    background: #df2359;
+    color: white;
+    cursor: pointer;
+    transition: all 600ms ease-in-out;
+    margin: 0 auto;
+  }
+  button:hover {
+    background: #c0392b;
+  }
+  form img {
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+  }
+  form {
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  input {
+    border: 0;
+    background: none;
+    padding: 10px;
+    width: 300px;
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    transform: translateY(50%);
+  }
+
+  span a {
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+#container-pop:before {
+  width: 400px;
+  height: 550px;
+  content: '';
+  background: inherit;
+  box-shadow: inset 0 0 0 200px rgba(255, 255, 255, 0.2);
+  filter: blur(8px);
+}
+
+.username {
+  text-transform: uppercase;
+}
+
+.signout-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+}
+.edit-btn {
+  position: absolute;
+  bottom: -100px;
+  left: 0px;
+}
+.save-btn {
+  position: absolute;
+  bottom: -116px;
+  left: 5px;
+}
+.change-div {
+  transform: translateY(50%);
+}
