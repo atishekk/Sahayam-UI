@@ -29,7 +29,7 @@ function AuthUI() {
   const [progress, setProgress] = useState(false);
 
   useEffect(() => {
-    setContainer(document.getElementById('container'));
+    setContainer(document.querySelector('.container'));
     setPartOne(document.getElementById('part_one'));
     setPartTwo(document.getElementById('part_two'));
   });
