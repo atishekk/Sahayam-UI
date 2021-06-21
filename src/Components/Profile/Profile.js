@@ -4,7 +4,8 @@ import { useHistory } from 'react-router-dom';
 
 function Profile({ setIsPopoverOpen }) {
   const [form, setForm] = useState(false);
-  let history = useHistory();
+  // doesnt work for components
+  // let history = useHistory();
   // inititalize with original user details
   const [email, setEmail] = useState('ujjwalkadam68@gmail.com');
 
@@ -28,8 +29,8 @@ function Profile({ setIsPopoverOpen }) {
 
   function onSignOut() {
     // sign out user
-
-    history.push('/auth');
+    localStorage.removeItem("token");
+    window.location = "/auth";
   }
   return (
     <main>

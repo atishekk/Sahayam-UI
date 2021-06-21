@@ -1,24 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { gql } from '@apollo/client';
+import { gql, useMutation  } from '@apollo/client';
 import './Auth.scss';
 
-function AuthUI() {
-  //  const SIGNUP_USER = gql``;
+function AuthUI(props) {
+  const SIGNUP_USER = gql`
+    mutation(
+      $username: String!
+      $email: String!
+      $password: String!
+      $confirm_password: String!
+    ) {
+      signUp(
+        username: $username
+        email: $email
+        password: $password
+        confirm_password: $confirm_password
+      )
+    }
+  `;
+
+  const SIGNIN_USER = gql`
+  mutation($username: String, $email: String, $password: String!) {
+    signIn(username: $username, email: $email, password: $password)
+  }`;
+
+  const SIGNUP_WORKER = ``;
+
+  const SIGNIN_WORKER = ``;
 
   const [container, setContainer] = useState();
   const [partOne, setPartOne] = useState();
   const [partTwo, setPartTwo] = useState();
   const [dateState, setDateState] = useState('text');
 
-  // signIn
-  const [identifier, setIdentifier] = useState();
-  const [password, setPassword] = useState();
-
-  // signUp
-  const [newEmail, setNewEmail] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  //reusing the password, email and user name state for sign up and sign in
   const [username, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [DOB, setDOB] = useState();
   const [city, setCity] = useState('');
@@ -32,16 +51,28 @@ function AuthUI() {
     setContainer(document.querySelector('.container'));
     setPartOne(document.getElementById('part_one'));
     setPartTwo(document.getElementById('part_two'));
+    document.title = "Sahayam - Authentication";
   });
 
   const onSignUp = (e) => {
     e.preventDefault();
-    console.log(name, newEmail, newPassword, city, mobile, country, Date(DOB));
+    console.log(name, email, password, city, mobile, country, Date(DOB));
+    let queryString = (role === 'Worker') ? SIGNUP_WORKER : SIGNUP_USER;
+
+    //loading and error
+    //yaha hook ko call nhi kar sakte
+    ////Separate query strings ke bare mein dekhna padega
+    //const [signUp, {loading, error}] = useMutation(queryString, {
+    //  onCompleted: data => {
+    //    localStorage.setItem('token', data.signUp);
+    //    props.history.push("/");
+    //  }
+    //})
   };
 
   const onSignIn = (e) => {
     e.preventDefault();
-    console.log(identifier, password);
+    console.log(email, username, password);
   };
 
   const gotoFirstPart = () => {
@@ -58,11 +89,37 @@ function AuthUI() {
     partTwo.classList.remove('inactive-form-part');
   };
 
+  const [signUp, {loading, error}] = useMutation(SIGNUP_USER, 
+    {
+      onCompleted: data => {
+        localStorage.setItem('token', data.signUp);
+        props.history.push("/");
+      }
+    }
+  );
+
+  const [signIn, {_loading, _error}] = useMutation(SIGNIN_USER,
+    {
+      onCompleted: data => {
+        localStorage.setItem('token', data.signUp);
+        props.history.push("/");
+      }
+    }
+  );
+
   return (
     <div>
       <div className="container">
         <div className="form-container sign-up-container">
-          <form onSubmit={(e) => onSignUp(e)}>
+          <form onSubmit={e => {
+            e.preventDefault();
+            signUp({variables: {
+              username: username,
+              email: email,
+              password: password,
+              confirm_password: confirmPassword
+            }});
+          }}>
             <h1>Create Account</h1>
             <div>
               {' '}
@@ -76,22 +133,16 @@ function AuthUI() {
                 onChange={(e) => setUserName(e.target.value)}
               />
               <input
-                type="text"
-                placeholder="Your Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input
                 type="email"
                 placeholder="Email Address"
-                value={newEmail}
-                onChange={(e) => setNewEmail(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 type="password"
                 placeholder="Password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <input
                 type="password"
@@ -99,7 +150,8 @@ function AuthUI() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              <button
+              <a
+                href="#"
                 value="next"
                 onClick={() => {
                   setProgress(true);
@@ -107,9 +159,15 @@ function AuthUI() {
                 }}
               >
                 Next
-              </button>
+              </a>
             </div>
             <div id="part_two" className="inactive-form-part">
+              <input
+                type="text"
+                placeholder="Your Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
               <input
                 placeholder="Date of Birth"
                 type={dateState}
@@ -152,8 +210,10 @@ function AuthUI() {
                   onChange={(e) => setNGO(e.target.value)}
                 />
               ) : null}
-              <button
-                value="next"
+              <a
+                style={{display: 'block'}}
+                href="#"
+                value="back"
                 className="back-button"
                 onClick={() => {
                   setProgress(false);
@@ -161,7 +221,7 @@ function AuthUI() {
                 }}
               >
                 Go Back
-              </button>
+              </a>
               <button value="save" type="submit">
                 Sign Up
               </button>
@@ -169,13 +229,28 @@ function AuthUI() {
           </form>
         </div>
         <div className="form-container sign-in-container">
-          <form onSubmit={(e) => onSignIn(e)}>
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            const vars = (email === "") ? 
+              {username: username, password: password} : 
+              {email: email, password: password};
+            signIn({
+              variables: vars
+            });
+            }}>
             <h1>Sign in</h1>
             <input
               type="text"
-              placeholder="Email or Username"
-              value={identifier}
-              onChange={(e) => setIdentifier(e.target.value)}
+              placeholder="User name"
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+            {"Or"}
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"

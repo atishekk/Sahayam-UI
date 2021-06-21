@@ -2,6 +2,10 @@
   "name": "sahayamx",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "14.15.3",
+    "npm": "7.10.0"
+  },
   "dependencies": {
     "@apollo/client": "^3.3.20",
     "@testing-library/jest-dom": "^5.14.1",
