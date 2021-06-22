@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './navbar.scss';
 import { Popover } from 'react-tiny-popover';
 import Profile from '../Profile/Profile';
+import { useLocation } from 'react-router-dom';
 
 function Navbar() {
+  let location = useLocation();
+  let path = location.pathname;
+
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const user = true;
+
+  useEffect(() => {
+    console.log(path);
+  });
+
   return (
     <nav className="nav-bar">
       <h1>Sahayam</h1>
-      {/* only show when user not signed In */}
-      {user && (
+      {path != '/auth' && (
         <Popover
           isOpen={isPopoverOpen}
           position={['bottom']} // if you'd like, you can limit the positions

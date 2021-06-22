@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { Popover } from 'react-tiny-popover';
 import Profile from '../Profile/Profile';
+import Layout from '../Layout/Layout';
 
 function Dashboard() {
   const [isPopoverOpen, setIsPopoverOpen] = useState(true);
@@ -36,46 +37,48 @@ function Dashboard() {
   ];
 
   return (
-    <div className="main-dash">
-      <div className="col1">
-        <div className="filter">
-          <label className="label-container">
-            One
-            <input type="checkbox" checked="checked" />
-            <span className="checkmark"></span>
-          </label>
+    <Layout>
+      <div className="main-dash">
+        <div className="col1">
+          <div className="filter">
+            <label className="label-container">
+              One
+              <input type="checkbox" checked="checked" />
+              <span className="checkmark"></span>
+            </label>
 
-          <label className="label-container">
-            Two
-            <input type="checkbox" />
-            <span className="checkmark"></span>
-          </label>
+            <label className="label-container">
+              Two
+              <input type="checkbox" />
+              <span className="checkmark"></span>
+            </label>
 
-          <label className="label-container">
-            Three
-            <input type="checkbox" />
-            <span className="checkmark"></span>
-          </label>
+            <label className="label-container">
+              Three
+              <input type="checkbox" />
+              <span className="checkmark"></span>
+            </label>
 
-          <label className="label-container">
-            Four
-            <input type="checkbox" />
-            <span className="checkmark"></span>
-          </label>
+            <label className="label-container">
+              Four
+              <input type="checkbox" />
+              <span className="checkmark"></span>
+            </label>
+          </div>
+        </div>
+
+        <div className="col2">
+          {posts.map((post) => (
+            <Post title={post.title} description={post.description} context={post.context} />
+          ))}
+        </div>
+        <div className="col3">
+          <Link to="/addTask">
+            <button className="fill">Add A Task</button>
+          </Link>
         </div>
       </div>
-
-      <div className="col2">
-        {posts.map((post) => (
-          <Post title={post.title} description={post.description} context={post.context} />
-        ))}
-      </div>
-      <div className="col3">
-        <Link to="/addTask">
-          <button className="fill">Add A Task</button>
-        </Link>
-      </div>
-    </div>
+    </Layout>
   );
 }
 

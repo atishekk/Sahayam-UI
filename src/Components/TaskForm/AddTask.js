@@ -4,6 +4,7 @@ import Step2 from './Step2';
 import Step3 from './Step3';
 import './style.scss';
 import { withRouter } from 'react-router-dom';
+import Layout from '../Layout/Layout';
 
 class AddTask extends React.Component {
   constructor(props) {
@@ -94,7 +95,7 @@ class AddTask extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Layout>
         <div>
           <div className="main-form">
             <div className="head-row">
@@ -152,7 +153,7 @@ class AddTask extends React.Component {
             </form>
           </div>
         </div>
-      </React.Fragment>
+      </Layout>
     );
   }
 }
