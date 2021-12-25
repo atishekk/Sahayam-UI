@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400&display=swap');
+
+.auth-container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+}
+.auth-left {
+  width: 29%;
+  background-color: rgba(82, 177, 255, 0.9);
+  align-items: center;
+  position: relative;
+  img {
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.auth-right {
+  width: 71%;
+  background-color: #007bffe6;
+}
+.form-content {
+  margin: 0 auto;
+  max-width: 400px;
+  font-family: Lato;
+  margin-top: 15%;
+  height: 600px;
+  // background-color: rgba(255, 235, 205, 0.1);
+  .form-heading h1 {
+    color: #fff;
+    font-size: 28px;
+    text-align: left;
+    line-height: 0.9;
+    font-weight: 400;
+  }
+
+  .line p {
+    margin-top: 10px;
+    font-weight: 300;
+    font-size: 16px;
+    color: white;
+  }
+}
+
+.form-inputs {
+  input {
+    box-sizing: border-box;
+    border: none;
+    padding: 14px 18px;
+    width: 84%;
+
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 300;
+    border-radius: 7px;
+
+    &:hover {
+      background-color: #f2f2f2;
+    }
+  }
+}
+.submit-btn button {
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: white;
+  text-transform: capitalize;
+  color: #007bffe6;
+  border: none;
+  padding: 8px 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 18px;
+  margin-left: 0px;
+  margin-top: 30px;
+  &:hover {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+.extra-options {
+  margin-top: 20px;
+  color: white;
+}
+.google {
+  cursor: pointer;
+  transform: translateY(5px);
+  background-color: rgba(255, 255, 255, 0.3);
+  display: inline-block;
+  padding: 5px;
+  border-radius: 100px;
+  margin-left: 10px;
+  .img-google {
+    width: 26px;
+    height: 26px;
+  }
+  .img-github {
+    width: 30px;
+    height: 28px;
+  }
+}
+.firebase-logo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.website-head {
+  font-weight: 300;
+  font-size: 40px;
+  color: white;
+  text-transform: capitalize;
+  margin: 20px;
+}
+.auth-left {
+  position: relative;
+}
+.book-icon {
+  position: fixed;
+  top: 0px;
+  left: 10px;
+}
